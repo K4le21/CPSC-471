@@ -10,13 +10,16 @@ def start_client(server_name, server_port):
     # Attempt to connect to the server
     client_socket.connect((server_ip, server_port))
 
+    user_input = input("ftp> ")
+    client_socket.send(user_input.encode())
+
 
 
 
 if __name__ == "__main__":
     # Check if both server_name and server_port are provided as command-line arguments
     if len(sys.argv) != 3:
-        print("Usage: python3 client.py <serverName> <serverPort>")
+        print("Usage: python3 client.py server.py <serverPort>")
         sys.exit(1)
 
     # Get server_name and server_port from command-line arguments
