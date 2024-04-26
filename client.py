@@ -55,7 +55,8 @@ def send_file (fileName, connSock):
 if __name__ == "__main__":
     # Check if both server_name and server_port are provided as command-line arguments
     if len(sys.argv) != 3:
-        print("Usage: python3 client.py <serverMachine> <serverPort>")
+        print ("Usage: python3 client.py <serverMachine> <serverPort>")
+        print ("Use 127.0.0.1 as <serverMachine> when testing")
         sys.exit(1)
 
     # Get server_name and server_port from command-line arguments
