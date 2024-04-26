@@ -3,6 +3,8 @@ import os
 def handler(command, connection_socket):
     # Get the "arguments from the client and split them up"
     command_arguments = command.split()
+    print (command)
+    print (command_arguments)
 
     # See what command the user inputted
     if command == "get":
@@ -11,23 +13,24 @@ def handler(command, connection_socket):
         return handle_put_command(command_arguments, connection_socket)
     elif command == "ls":
         return handle_ls_command()
-    elif command == "help":
-        return handle_help_command()
     elif command == "quit":
         return "quit"
     else:
         return "Invalid command. Please enter a valid command."
     
 def handle_get_command (arguments):
+    # TODO: Downloads file <file name> from the server
+    print ("this is the get command")
     pass
 
-def handle_put_command(command_arguments, connection_socket):
+def handle_put_command (arguments, connection):
+    # TODO: Uploads file <file name> to the server
+    print ("this is the put command")
     pass
 
 def handle_ls_command():
-    pass
-
-def handle_help_command():
+    # TODO: Lists files on the server
+    print ("this is the ls command")
     pass
 
 def recvAll(sock, numBytes):

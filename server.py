@@ -3,17 +3,25 @@ import os
 import sys
 from commands import handler
 
-def server_handler (server_socket, client_socket):
+def server_handler (client_socket):
+    client_socket.send("You have successfully connected to the FTP server. Please enter your commands.".encode())
+
     while True:
-        # Receive the data the client has to send.
-        # This will receive at most 1024 bytes
+
+        # Get user command
         client_command = client_socket.recv(1024)
+
+        if not client_command:
+            print("Client disconnected unexpectedly.")
+            exit(1)
 
         print("Client sent " + str(client_command.decode()))
 
         response = handler(client_command, client_socket)
-        
-    
+
+        #if response == "quit":
+        #    print("Received 'quit' command. Closing connection.")
+        #    exit(0)
 
 def start_server(port):
     # Server IP
@@ -33,7 +41,7 @@ def start_server(port):
         
         print("Client connected from: " + str(client_info))
         
-        server_handler (server_socket, client_socket)
+        server_handler (client_socket)
     
             
 
