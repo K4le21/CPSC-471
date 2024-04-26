@@ -12,10 +12,10 @@ def server_handler (client_socket):
         client_command = client_socket.recv(1024)
 
         if not client_command:
-            print("Client disconnected unexpectedly.")
-            exit(1)
+            print ("Client disconnected unexpectedly.")
+            exit (1)
 
-        print("Client sent " + str(client_command.decode()))
+        print ("Client sent " + str(client_command.decode()))
 
         response = handler(client_command, client_socket)
 
@@ -34,12 +34,12 @@ def start_server(port):
     server_socket.listen(1)
 
     while True:
-        print("Waiting for clients to connect...")
+        print ("Waiting for clients to connect...")
 	
         # Accept a waiting connection
         client_socket, client_info = server_socket.accept()
         
-        print("Client connected from: " + str(client_info))
+        print ("Client connected from: " + str(client_info))
         
         server_handler (client_socket)
     

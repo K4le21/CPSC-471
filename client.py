@@ -8,6 +8,9 @@ def start_client(server_name, server_port):
     # Attempt to connect to the server
     client_socket.connect((server_name, server_port))
 
+    welcome_message = client_socket.recv(1024).decode()
+    print (welcome_message)
+
     while True:
         user_input = input("ftp> ")
         client_socket.send(user_input.encode())
