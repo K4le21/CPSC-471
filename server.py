@@ -1,10 +1,11 @@
 import socket
 import os
 import sys
-from commands import handler
+from server_commands import handler
 
 def server_handler (client_socket):
-    client_socket.send("You have successfully connected to the FTP server. Please enter your commands.".encode())
+    welcome_msg = "You have successfully connected to the FTP server. Please enter your commands."
+    client_socket.send(welcome_msg.encode())
 
     while True:
 
@@ -18,10 +19,6 @@ def server_handler (client_socket):
         print ("Client sent " + str(client_command.decode()))
 
         response = handler(client_command, client_socket)
-
-        if response == "quit":
-            print("Received 'quit' command. Closing connection.")
-            exit(0)
 
         # If the reponse is in bytes just send it
         if isinstance(response, bytes):

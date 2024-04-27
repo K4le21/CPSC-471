@@ -61,12 +61,11 @@ def handle_put_command (arguments, connection):
     print ("this is the put command")
 
 def handle_ls_command():
-    # TODO: Lists files on the server
+    # Store the directory in file_list
     file_list = os.listdir("server_files")
 
     # Join the list of files into a string with newline separators
     file_list_str = "\n".join(file_list)
-    print (file_list_str)
 
     return file_list_str
 

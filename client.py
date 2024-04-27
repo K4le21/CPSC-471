@@ -16,14 +16,15 @@ def start_client(server_name, server_port):
         client_socket.send(user_input.encode())
 
         server_response = client_socket.recv(1024).decode()
+        print (server_response)
 
-        if server_response == "send file":
+
+        if user_input == "quit":
+            print("Received 'quit' command. Closing connection.")
+            exit(0)
+        elif server_response == "send file":
             file_name = user_input.split(" ")[1]
             send_file (file_name, client_socket)
-        
-        server_response = client_socket.recv(1024).decode()
-        
-
 
 
 def send_file (fileName, connSock):
