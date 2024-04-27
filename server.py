@@ -19,9 +19,16 @@ def server_handler (client_socket):
 
         response = handler(client_command, client_socket)
 
-        #if response == "quit":
-        #    print("Received 'quit' command. Closing connection.")
-        #    exit(0)
+        if response == "quit":
+            print("Received 'quit' command. Closing connection.")
+            exit(0)
+
+        # If the reponse is in bytes just send it
+        if isinstance(response, bytes):
+            client_socket.send(response)
+        else:
+            # Otherwise encode it
+            client_socket.send(response.encode())
 
 def start_server(port):
     # Server IP
@@ -51,14 +58,14 @@ def start_server(port):
 if __name__ == "__main__":
     # Check if a port number is provided as a command-line argument
     if len(sys.argv) != 2:
-        print("Usage: python3 server.py <port>")
+        print ("Usage: python3 server.py <port>")
         sys.exit(1)
 
     try:
         # Convert the provided argument to an integer (the port number)
         port = int(sys.argv[1])
     except ValueError:
-        print("Invalid port number. Please provide a valid integer.")
+        print ("Invalid port number. Please provide a valid integer.")
         sys.exit(1)
 
     start_server(port)
