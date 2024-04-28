@@ -2,7 +2,6 @@ import os
 
 def command_handler(client_command, connection_socket):
     # Get the "arguments from the client and split them up"
-    print ("test")
     command_arguments = client_command.split()
     
     command = command_arguments[0].decode()
@@ -38,41 +37,45 @@ def handle_put_command (arguments, connection):
          return "Invalid 'put' command. Please do 'put <filename>'"
     
     # Extract file name from arguments
-    file_name = arguments[1]
+    file_name = str(arguments[1])
     
     # Create the file path
     file_path = os.path.join("server_files", file_name)
+
+    connection.send("send file".encode())
     
+    # Request user file
+    fileData = ""
+
+    # The temporary buffer to store the received data.
+    recvBuff = ""
+
+    # The size of the incoming file
+    fileSize = 0
+
+    # The buffer containing the file size
+    fileSizeBuff = ""
+
+    # Receive the first 10 bytes indicating the size of the file.
+    fileSizeBuff = recvAll(connection, 10)
+
+    # Get the file size
+    fileSize = int(eval(fileSizeBuff))
+
+    print ("The file size is ", fileSize)
+    # Get the file data
+
+    fileData = recvAll(connection, fileSize)
+    fileData = eval(fileData)
+    print ("The file data is: " + fileData)
     
-    ## Request user file
-    #fileData = ""
-#
-    ## The temporary buffer to store the received
-    ## data.
-    #recvBuff = ""
-#
-    ## The size of the incoming file
-    #fileSize = 0
-#
-    ## The buffer containing the file size
-    #fileSizeBuff = ""
-#
-    ## Receive the first 10 bytes indicating the
-    ## size of the file
-    #fileSizeBuff = recvAll(connection, 10)
-#
-    ## Get the file size
-    #fileSize = int(eval(fileSizeBuff))
-#
-    #print ("The file size is ", fileSize)
-#
-    ## Get the file data
-    #fileData = recvAll(connection, fileSize)
-#
-    #print ("The file data is: ")
-    #print (eval(fileData))
-    #print ("this is the put command")
-    return "put command"
+
+    with open(file_path, "wb") as file:
+        file.write()
+
+    # Print a success message and return it to the client
+    print(f"File '{file_name}' successfully uploaded to the server.")
+    return f"File '{file_name}' successfully uploaded to the server."
 
 def handle_ls_command():
     # Store the directory in file_list

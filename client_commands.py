@@ -7,7 +7,7 @@ def client_handler(response, connection_socket):
             exit(0)
     elif response == "send file":
         file_name = response.split(" ")[1]
-        response (file_name, connection_socket)
+        send_file (file_name, connection_socket)
 
 def send_file (fileName, connSock):
     fileObj = open(fileName, "r")
