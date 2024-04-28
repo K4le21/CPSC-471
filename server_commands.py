@@ -2,9 +2,15 @@ import os
 
 def command_handler(client_command, connection_socket):
     # Get the "arguments from the client and split them up"
-    command_arguments = client_command.split()
+    print (client_command)
+    temp_list = client_command.split()
+    command_arguments = []
     
-    command = command_arguments[0].decode()
+    for i in temp_list:
+        command_arguments.append(i.decode())
+    print (command_arguments)
+
+    command = command_arguments[0]
     print (command)
 
     # See what command the user inputted
@@ -42,7 +48,7 @@ def handle_put_command (arguments, connection):
     # Create the file path
     file_path = os.path.join("server_files", file_name)
 
-    connection.send("send file".encode())
+    connection.send(("send_file " + file_name).encode())
     
     # Request user file
     fileData = ""
@@ -66,8 +72,8 @@ def handle_put_command (arguments, connection):
     # Get the file data
 
     fileData = recvAll(connection, fileSize)
-    fileData = eval(fileData)
-    print ("The file data is: " + fileData)
+    print (type(fileData))
+    print ("The file data is: " + str(fileData))
     
 
     with open(file_path, "wb") as file:

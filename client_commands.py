@@ -1,12 +1,17 @@
 import os
 
 def client_handler(response, connection_socket):
+    command_arguments = response.split()
+    
+    command = command_arguments[0]
+    print (command_arguments)
 
-    if response == "quit":
+    if command == "quit":
             print("Received 'quit' command. Closing connection.")
             exit(0)
-    elif response == "send file":
-        file_name = response.split(" ")[1]
+    elif command == "send_file":
+        file_name = command_arguments[1]
+        print (file_name)
         send_file (file_name, connection_socket)
 
 def send_file (fileName, connSock):
@@ -18,7 +23,6 @@ def send_file (fileName, connSock):
         # Make sure we did not hit EOF
     if fileData:
         
-            
         # Get the size of the data read
         # and convert it to string
         dataSizeStr = str(len(fileData))
