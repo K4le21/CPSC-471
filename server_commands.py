@@ -48,6 +48,9 @@ def handle_put_command (arguments, connection):
     # Create the file path
     file_path = os.path.join("server_files", file_name)
 
+    if os.path.exists(file_path):
+        return f"Error: File '{file_name}' already exists on the server."
+
     connection.send(("send_file " + file_name).encode())
     
     # Request user file
@@ -72,12 +75,10 @@ def handle_put_command (arguments, connection):
     # Get the file data
 
     fileData = recvAll(connection, fileSize)
-    print (type(fileData))
-    print ("The file data is: " + str(fileData))
-    
+    print (fileData)
 
     with open(file_path, "wb") as file:
-        file.write()
+        file.write(str(fileData))
 
     # Print a success message and return it to the client
     print(f"File '{file_name}' successfully uploaded to the server.")
