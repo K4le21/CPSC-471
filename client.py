@@ -12,7 +12,11 @@ def start_client(server_name, server_port):
     print (welcome_message)
 
     while True:
+        
+        # Get user input
         user_input = input("ftp> ")
+
+        # Send user_input to the server
         client_socket.send(user_input.encode())
 
         server_response = client_socket.recv(1024).decode()
