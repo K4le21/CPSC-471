@@ -14,7 +14,7 @@ def server_handler (client_socket):
 
         if not client_command:
             print ("Client disconnected unexpectedly.")
-            exit (1)
+            return
 
         print ("Client sent " + str(client_command.decode()))
 

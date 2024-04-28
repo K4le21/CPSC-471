@@ -21,44 +21,51 @@ def handler(client_command, connection_socket):
     
 def handle_get_command (arguments):
     # TODO: Downloads file <file name> from the server
+
+    if len(arguments) != 2:
+         return "Invalid 'get' command. Please do 'get <filename>'"
     
-    #file_path = os.path.join(os.path.dirname(__file__), "client_resources", file_name)
-    print ("this is the get command")
-    pass
+    file_name = str(arguments[1])
+    
+    #file_path = os.path.join(os.path.dirname(__file__), "", file_name)
+    return "get command"
 
 def handle_put_command (arguments, connection):
     # TODO: Uploads file <file name> to the server
+
+    if len(arguments) != 2:
+         return "Invalid 'put' command. Please do 'put <filename>'"
     
-    # Request user file
     
-    
-    fileData = ""
-
-    # The temporary buffer to store the received
-    # data.
-    recvBuff = ""
-
-    # The size of the incoming file
-    fileSize = 0
-
-    # The buffer containing the file size
-    fileSizeBuff = ""
-
-    # Receive the first 10 bytes indicating the
-    # size of the file
-    fileSizeBuff = recvAll(connection, 10)
-
-    # Get the file size
-    fileSize = int(eval(fileSizeBuff))
-
-    print ("The file size is ", fileSize)
-
-    # Get the file data
-    fileData = recvAll(connection, fileSize)
-
-    print ("The file data is: ")
-    print (eval(fileData))
-    print ("this is the put command")
+    ## Request user file
+    #fileData = ""
+#
+    ## The temporary buffer to store the received
+    ## data.
+    #recvBuff = ""
+#
+    ## The size of the incoming file
+    #fileSize = 0
+#
+    ## The buffer containing the file size
+    #fileSizeBuff = ""
+#
+    ## Receive the first 10 bytes indicating the
+    ## size of the file
+    #fileSizeBuff = recvAll(connection, 10)
+#
+    ## Get the file size
+    #fileSize = int(eval(fileSizeBuff))
+#
+    #print ("The file size is ", fileSize)
+#
+    ## Get the file data
+    #fileData = recvAll(connection, fileSize)
+#
+    #print ("The file data is: ")
+    #print (eval(fileData))
+    #print ("this is the put command")
+    return "put command"
 
 def handle_ls_command():
     # Store the directory in file_list
