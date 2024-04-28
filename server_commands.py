@@ -37,7 +37,11 @@ def handle_put_command (arguments, connection):
     if len(arguments) != 2:
          return "Invalid 'put' command. Please do 'put <filename>'"
     
+    # Extract file name from arguments
+    file_name = arguments[1]
     
+    # Create the file path
+    file_path = os.path.join("server_files", file_name)
     
     
     ## Request user file
