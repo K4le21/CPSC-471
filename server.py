@@ -1,7 +1,7 @@
 import socket
 import os
 import sys
-from server_commands import handler
+from server_commands import command_handler
 
 def server_handler (client_socket):
     welcome_msg = "You have successfully connected to the FTP server. Please enter your commands."
@@ -12,13 +12,16 @@ def server_handler (client_socket):
         # Get user command
         client_command = client_socket.recv(1024)
 
+        # If client disconnects
         if not client_command:
             print ("Client disconnected.")
             return
 
-        print ("Client sent " + str(client_command.decode()))
+        # Print what command client sent
+        print ("Client sent " + str(client_command.decode()) + ".")
 
-        response = handler(client_command, client_socket)
+        # Handle the client command
+        response = command_handler(client_command, client_socket)
 
         # If the reponse is in bytes just send it
         if isinstance(response, bytes):

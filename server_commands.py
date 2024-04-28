@@ -1,7 +1,8 @@
 import os
 
-def handler(client_command, connection_socket):
+def command_handler(client_command, connection_socket):
     # Get the "arguments from the client and split them up"
+    print ("test")
     command_arguments = client_command.split()
     
     command = command_arguments[0].decode()
@@ -35,6 +36,8 @@ def handle_put_command (arguments, connection):
 
     if len(arguments) != 2:
          return "Invalid 'put' command. Please do 'put <filename>'"
+    
+    
     
     
     ## Request user file
