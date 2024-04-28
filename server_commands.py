@@ -53,9 +53,6 @@ def handle_put_command (arguments, connection):
     # Request user file
     fileData = ""
 
-    # The temporary buffer to store the received data.
-    recvBuff = ""
-
     # The size of the incoming file
     fileSize = 0
 
@@ -63,20 +60,31 @@ def handle_put_command (arguments, connection):
     fileSizeBuff = ""
 
     # Receive the first 10 bytes indicating the size of the file.
-    fileSizeBuff = recvAll(connection, 10)
-    print (type(fileSizeBuff))
-    print (fileSizeBuff)
+    fileSizeBuff = connection.recv(10)
+    if not fileSizeBuff:
+            return "Error receiving file size header"
+    else:
+        print("Client received 'send_file' and is now sending file.")
 
     # Get the file size
-    fileSize = int(eval(fileSizeBuff))
+    fileSize = int((fileSizeBuff.decode()))
 
     print ("The file size is ", fileSize)
 
     # Get the file data
-    fileData = recvAll(connection, fileSize)
+    fileData = b""
+    bytes_received = 0
+    while bytes_received < fileSize:
+        dataChunk = connection.recv(min(1024, fileSize - bytes_received))
+        if not dataChunk:
+            break
+        fileData += dataChunk
+        bytes_received += len(dataChunk)
+        print(f"Received {bytes_received} bytes")
+    print (fileData)
 
-    with open(file_path, "w") as file:
-        file.write(fileData[2:-1])
+    with open(file_path, "wb") as file:
+        file.write(fileData)
 
     # Print a success message and return it to the client
     print(f"File '{file_name}' successfully uploaded to the server.")
@@ -90,26 +98,3 @@ def handle_ls_command():
     file_list_str = "\n".join(file_list)
 
     return file_list_str
-
-def recvAll(sock, numBytes):
-
-	# The buffer
-	recvBuff = ""
-	
-	# The temporary buffer
-	tmpBuff = ""
-	
-	# Keep receiving till all is received
-	while len(recvBuff) < numBytes:
-		
-		# Attempt to receive bytes
-		tmpBuff = sock.recv(numBytes)
-		
-		# The other side has closed the socket
-		if not tmpBuff:
-			break
-		
-		# Add the received bytes to the buffer
-		recvBuff += str(tmpBuff)
-	
-	return recvBuff

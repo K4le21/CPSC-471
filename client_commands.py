@@ -47,4 +47,5 @@ def send_file (fileName, connSock):
         # The file has been read. We are done
 
 
-    print ("Sent ", numSent, " bytes.")
+    success_msg = connSock.recv(1024).decode()
+    print (success_msg)
