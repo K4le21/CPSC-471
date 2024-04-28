@@ -2,16 +2,13 @@ import os
 
 def command_handler(client_command, connection_socket):
     # Get the "arguments from the client and split them up"
-    print (client_command)
     temp_list = client_command.split()
     command_arguments = []
     
     for i in temp_list:
         command_arguments.append(i.decode())
-    print (command_arguments)
-
+    
     command = command_arguments[0]
-    print (command)
 
     # See what command the user inputted
     if command == "get":
@@ -67,18 +64,19 @@ def handle_put_command (arguments, connection):
 
     # Receive the first 10 bytes indicating the size of the file.
     fileSizeBuff = recvAll(connection, 10)
+    print (type(fileSizeBuff))
+    print (fileSizeBuff)
 
     # Get the file size
     fileSize = int(eval(fileSizeBuff))
 
     print ("The file size is ", fileSize)
-    # Get the file data
 
+    # Get the file data
     fileData = recvAll(connection, fileSize)
-    
 
     with open(file_path, "w") as file:
-        file.write(fileData)
+        file.write(fileData[2:-1])
 
     # Print a success message and return it to the client
     print(f"File '{file_name}' successfully uploaded to the server.")

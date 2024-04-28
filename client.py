@@ -27,6 +27,7 @@ def start_client(server_name, server_port):
         client_handler (server_response, client_socket)
 
 
+
 if __name__ == "__main__":
     # Check if both server_name and server_port are provided as command-line arguments
     if len(sys.argv) != 3:

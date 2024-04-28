@@ -36,7 +36,6 @@ def send_file (fileName, connSock):
         # Prepend the size of the data to the
         # file data.
         fileData = dataSizeStr + fileData
-        print (fileData.encode())
         
         # The number of bytes sent
         numSent = 0
