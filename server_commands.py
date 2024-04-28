@@ -75,10 +75,10 @@ def handle_put_command (arguments, connection):
     # Get the file data
 
     fileData = recvAll(connection, fileSize)
-    print (fileData)
+    
 
-    with open(file_path, "wb") as file:
-        file.write(str(fileData))
+    with open(file_path, "w") as file:
+        file.write(fileData)
 
     # Print a success message and return it to the client
     print(f"File '{file_name}' successfully uploaded to the server.")
@@ -105,7 +105,7 @@ def recvAll(sock, numBytes):
 	while len(recvBuff) < numBytes:
 		
 		# Attempt to receive bytes
-		tmpBuff =  sock.recv(numBytes)
+		tmpBuff = sock.recv(numBytes)
 		
 		# The other side has closed the socket
 		if not tmpBuff:
