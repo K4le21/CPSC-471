@@ -22,16 +22,55 @@ def command_handler(client_command, connection_socket):
     else:
         return "Invalid command. Please enter a valid command."
     
-def handle_get_command (arguments):
-    # TODO: Downloads file <file name> from the server
+def handle_get_command (arguments, connection):
+    # TODO: Fix this. I copy pasted from client_commands.py.
+    # Downloads file <file name> from the server
 
     if len(arguments) != 2:
          return "Invalid 'get' command. Please do 'get <filename>'"
     
+    # Extract file name from arguments
     file_name = str(arguments[1])
     
-    #file_path = os.path.join(os.path.dirname(__file__), "", file_name)
-    return "get command"
+    # Create the file path
+    file_path = os.path.join("server_files", file_name)
+
+    connection.send(("get_file " + file_name).encode())
+
+    fileObj = open(file_name, "r")
+
+    # Read 65536 bytes of data
+    fileData = fileObj.read(65536)
+        
+        # Make sure we did not hit EOF
+    if fileData:
+        
+        # Get the size of the data read
+        # and convert it to string
+        dataSizeStr = str(len(fileData))
+        
+        # Prepend 0's to the size string
+        # until the size is 10 bytes
+        while len(dataSizeStr) < 10:
+            dataSizeStr = "0" + dataSizeStr
+        print (dataSizeStr)
+    
+        # Prepend the size of the data to the
+        # file data.
+        fileData = dataSizeStr + fileData
+        
+        # The number of bytes sent
+        numSent = 0
+        
+        # Send the data!
+        while len(fileData) > numSent:
+            numSent += connection.send(fileData.encode())
+    
+        # The file has been read. We are done
+
+
+    success_msg = connection.recv(1024).decode()
+    print (success_msg)
 
 def handle_put_command (arguments, connection):
     # TODO: Uploads file <file name> to the server
