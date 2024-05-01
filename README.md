@@ -1,12 +1,12 @@
-Names:
+# Names:
 Vivian Cao         Email: vivicao@csu.fullerton.edu 
 Kyle Chan          Email: kchan21@csu.fullerton.edu
 Ryan Dencker       Email: dencker@csu.fullerton.edu
 Alexander Zavaleta Email: A_zavaleta@csu.fullerton.edu
-
-Programing Language: Python
-
-In structions on running the code:
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Programing Language: Python
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# In structions on running the code:
 Specifications
 The server shall be invoked as:
 pythonserv.py<PORTNUMBER>
@@ -21,8 +21,7 @@ ftp> Is(lists files on theserver)
 ftp> quit (disconnects from the server and exits)
 <img width="1139" alt="image" src="https://github.com/K4le21/CPSC-471/assets/70111655/14623cf4-ab84-49e2-a450-688b3e686cdb">
 <img width="1435" alt="image" src="https://github.com/K4le21/CPSC-471/assets/70111655/521f7c9e-d2e1-4927-901f-9393e85ece25">
-
-
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Anything special about your submission that we should take note:
 
 
