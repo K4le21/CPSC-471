@@ -22,47 +22,6 @@ def command_handler(client_command, connection_socket):
     else:
         return "Invalid command. Please enter a valid command."
     
-    '''
-def handle_get_command (arguments, connection):
-    # TODO: Fix this. I copy pasted from client_commands.py.
-    # Downloads file <file name> from the server
-
-    if len(arguments) != 2:
-         return "Invalid 'get' command. Please do 'get <filename>'"
-    
-    #get file name
-    file_name = str(arguments[1])
-
-    #get file from server_files
-    file_path = os.path.join("server_files", file_name)
-
-    # Check if file exists
-    if not os.path.exists(file_path):
-        connection.send("File not found".encode())
-        return
-    
-    fileObj = open(file_path, "r")
-
-    fileData = fileObj.read(65536)
-
-    if fileData:
-
-        dataSizeStr = str(len(fileData))
-
-        while len(dataSizeStr) < 10:
-            dataSizeStr = "0" + dataSizeStr
-        print (dataSizeStr)
-
-        fileData = dataSizeStr + fileData
-
-        numSent = 0
-
-        while len(fileData) > numSent:
-            numSent += connection.send(fileData.encode())
-
-    print(f"File '{file_name}' successfully downloaded.")
-    return f"File '{file_name}' successfully downloaded."
-'''
 
 def handle_get_command(arguments, connection):
     # Downloads file <file name> from the server
@@ -98,8 +57,6 @@ def handle_get_command(arguments, connection):
     print(f"File '{file_name}' successfully downloaded.")
     return f"File '{file_name}' successfully downloaded."
 
-
-'''
 def handle_put_command (arguments, connection):
     # TODO: Uploads file <file name> to the server
 
@@ -130,63 +87,6 @@ def handle_put_command (arguments, connection):
     fileSizeBuff = connection.recv(10)
     if not fileSizeBuff:
             return "Error receiving file size header"
-    else:
-        print("Client received 'send_file' and is now sending file.")
-
-    # Get the file size
-    fileSize = int((fileSizeBuff.decode()))
-
-    print ("The file size is ", fileSize)
-
-    # Get the file data
-    fileData = b""
-    bytes_received = 0
-    while bytes_received < fileSize:
-        dataChunk = connection.recv(min(1024, fileSize - bytes_received))
-        if not dataChunk:
-            break
-        fileData += dataChunk
-        bytes_received += len(dataChunk)
-        print(f"Received {bytes_received} bytes")
-    print (fileData)
-
-    with open(file_path, "wb") as file:
-        file.write(fileData)
-
-    # Print a success message and return it to the client
-    print(f"File '{file_name}' successfully uploaded to the server.")
-    return f"File '{file_name}' successfully uploaded to the server."
-'''
-def handle_put_command(arguments, connection):
-    # TODO: Uploads file <file name> to the server
-
-    if len(arguments) != 2:
-        return "Invalid 'put' command. Please do 'put <filename>'"
-    
-    # Extract file name from arguments
-    file_name = str(arguments[1])
-    
-    # Create the file path
-    file_path = file_name
-
-    if os.path.exists(file_path):
-        return f"Error: File '{file_name}' already exists on the server."
-
-    connection.send(("send_file " + file_name).encode())
-    
-    # Request user file
-    fileData = ""
-
-    # The size of the incoming file
-    fileSize = 0
-
-    # The buffer containing the file size
-    fileSizeBuff = ""
-
-    # Receive the first 10 bytes indicating the size of the file.
-    fileSizeBuff = connection.recv(10)
-    if not fileSizeBuff:
-        return "Error receiving file size header"
     else:
         print("Client received 'send_file' and is now sending file.")
 
