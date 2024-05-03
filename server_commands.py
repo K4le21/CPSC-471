@@ -54,8 +54,8 @@ def handle_get_command(arguments, connection):
             # Send size and data
             connection.sendall(data_size_str.encode() + file_data)
 
-    print(f"File '{file_name}' successfully downloaded.")
-    return f"File '{file_name}' successfully downloaded."
+    print(f"File '{file_name}' successfully sent to client.")
+    return f"File '{file_name}' successfully sent to client."
 
 def handle_put_command (arguments, connection):
     # TODO: Uploads file <file name> to the server
