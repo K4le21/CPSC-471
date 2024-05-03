@@ -60,7 +60,7 @@ def handle_get_command(arguments, connection):
     return f"File '{file_name}' successfully sent to client."
 
 def handle_put_command (arguments, connection):
-
+    # Uploads file <file name> to the server
     if len(arguments) != 2:
          return "Invalid 'put' command. Please do 'put <filename>'"
     
