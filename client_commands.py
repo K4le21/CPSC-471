@@ -19,7 +19,7 @@ def client_handler(response, connection_socket):
         get_file (file_name, connection_socket)
 
      
-def get_file (file_name, connSock):
+def get_file (file_name, connection):
     #receive file from server
 
     fileData = ""
@@ -28,7 +28,7 @@ def get_file (file_name, connSock):
 
     fileSizeBuff = ""
 
-    fileSizeBuff = connSock.recv(10)
+    fileSizeBuff = connection.recv(10)
 
     if not fileSizeBuff:
             return "Error receiving file size header"
@@ -46,7 +46,7 @@ def get_file (file_name, connSock):
     bytes_received = 0
 
     while bytes_received < fileSize:
-        dataChunk = connSock.recv(min(1024, fileSize - bytes_received))
+        dataChunk = connection.recv(min(1024, fileSize - bytes_received))
         if not dataChunk:
             break
         fileData += dataChunk
@@ -56,10 +56,10 @@ def get_file (file_name, connSock):
     with open(file_name, "wb") as file:
         file.write(fileData)
 
-    success_msg = connSock.recv(1024).decode()
+    success_msg = connection.recv(1024).decode()
     print (success_msg)
 
-def send_file (fileName, connSock):
+def send_file (fileName, connection):
     fileObj = open(fileName, "r")
 
     # Read 65536 bytes of data
@@ -87,10 +87,10 @@ def send_file (fileName, connSock):
         
         # Send the data!
         while len(fileData) > numSent:
-            numSent += connSock.send(fileData.encode())
+            numSent += connection.send(fileData.encode())
     
         # The file has been read. We are done
 
 
-    success_msg = connSock.recv(1024).decode()
+    success_msg = connection.recv(1024).decode()
     print (success_msg)
