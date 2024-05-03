@@ -1,10 +1,10 @@
 import os
 
 def client_handler(response, connection_socket):
+    # Get the "arguments from the server and split them up"
     command_arguments = response.split()
     
     command = command_arguments[0]
-    
 
     if command == "quit":
         print("Received 'quit' command. Closing connection.")
@@ -20,8 +20,7 @@ def client_handler(response, connection_socket):
 
      
 def get_file (file_name, connection):
-    #receive file from server
-
+    # Downloads file <file name> from the server
     fileData = ""
 
     fileSize = 0
@@ -37,9 +36,6 @@ def get_file (file_name, connection):
 
     #get the file size
     fileSize = int((fileSizeBuff.decode()))
-
-    print("The file size is ", fileSize)
-    print (type(fileSize))
 
     fileData = b""
 
@@ -60,6 +56,7 @@ def get_file (file_name, connection):
     print (success_msg)
 
 def send_file (fileName, connection):
+    # Uploads file <file name> to the server
     fileObj = open(fileName, "r")
 
     # Read 65536 bytes of data
