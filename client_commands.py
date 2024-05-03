@@ -35,6 +35,7 @@ def get_file (file_name, connSock):
     else:
         print("Client received 'send_file' and is now sending file.")
 
+    #get the file size
     fileSize = int((fileSizeBuff.decode()))
 
     print("the file size is ", fileSize)
