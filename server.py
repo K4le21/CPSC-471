@@ -49,16 +49,12 @@ def start_server(port):
         print ("Client connected from: " + str(client_info))
         
         server_handler (client_socket)
-    
-            
-
-
 
 
 if __name__ == "__main__":
     # Check if a port number is provided as a command-line argument
     if len(sys.argv) != 2:
-        print ("Usage: python3 server.py <port>")
+        print ("Usage: python server.py <port>")
         sys.exit(1)
 
     try:

@@ -39,6 +39,8 @@ def handle_get_command(arguments, connection):
         connection.send("File not found".encode())
         return f"'{file_name}' not found"
     
+    connection.send(("get_file " + file_name).encode())
+    
     # Open the file in binary mode
     with open(file_path, "rb") as file_obj:
         # Read and send file data in chunks
@@ -58,7 +60,6 @@ def handle_get_command(arguments, connection):
     return f"File '{file_name}' successfully sent to client."
 
 def handle_put_command (arguments, connection):
-    # TODO: Uploads file <file name> to the server
 
     if len(arguments) != 2:
          return "Invalid 'put' command. Please do 'put <filename>'"
@@ -85,6 +86,7 @@ def handle_put_command (arguments, connection):
 
     # Receive the first 10 bytes indicating the size of the file.
     fileSizeBuff = connection.recv(10)
+
     if not fileSizeBuff:
             return "Error receiving file size header"
     else:

@@ -4,7 +4,7 @@ def client_handler(response, connection_socket):
     command_arguments = response.split()
     
     command = command_arguments[0]
-    print (command_arguments)
+    
 
     if command == "quit":
         print("Received 'quit' command. Closing connection.")
@@ -33,12 +33,13 @@ def get_file (file_name, connSock):
     if not fileSizeBuff:
             return "Error receiving file size header"
     else:
-        print("Client received 'send_file' and is now sending file.")
+        print("Client received 'get_file' and is now sending file.")
 
     #get the file size
     fileSize = int((fileSizeBuff.decode()))
 
-    print("the file size is ", fileSize)
+    print("The file size is ", fileSize)
+    print (type(fileSize))
 
     fileData = b""
 
@@ -51,13 +52,12 @@ def get_file (file_name, connSock):
         fileData += dataChunk
         bytes_received += len(dataChunk)
         print(f"Received {bytes_received} bytes")
-    print (fileData)
 
     with open(file_name, "wb") as file:
         file.write(fileData)
 
-    print(f"File '{file_name}' successfully downloaded.")
-    return f"File '{file_name}' successfully downloaded."
+    success_msg = connSock.recv(1024).decode()
+    print (success_msg)
 
 def send_file (fileName, connSock):
     fileObj = open(fileName, "r")
