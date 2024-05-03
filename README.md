@@ -1,7 +1,10 @@
 # Names:
 Vivian Cao - vivicao@csu.fullerton.edu
+
 Kyle Chan - kchan21@csu.fullerton.edu
+
 Ryan Dencker - dencker@csu.fullerton.edu
+
 Alexander Zavaleta - A_zavaleta@csu.fullerton.edu
 
 # Programing Language: Python
