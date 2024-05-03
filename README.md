@@ -1,29 +1,56 @@
-# Names:
-Vivian Cao - vivicao@csu.fullerton.edu
+# FTP File Transfer System
 
-Kyle Chan - kchan21@csu.fullerton.edu
+## Team Members
+- Vivian Cao - vivicao@csu.fullerton.edu
+- Kyle Chan - kchan21@csu.fullerton.edu
+- Ryan Dencker - dencker@csu.fullerton.edu
+- Alexander Zavaleta - A_zavaleta@csu.fullerton.edu
 
-Ryan Dencker - dencker@csu.fullerton.edu
+## Programming Language
+Python
 
-Alexander Zavaleta - A_zavaleta@csu.fullerton.edu
+---
 
-# Programing Language: Python
+## Description
+The FTP File Transfer System is a client-server application built in Python. It allows users to transfer files between a client machine and a server using FTP commands. The system consists of two main components:
 
-# In structions on running the code:
-The server shall be invoked as: server.py <port number>
+1. **Server (`server.py`):**
+   - Accepts incoming connections from FTP clients.
+   - Listens for FTP commands such as `get`, `put`, `ls`, and `quit`.
+   - Handles file transfer operations between clients and the server.
 
-<port number› specifies the port at which ftp server accepts connection requests.
+2. **Client (`client.py`):**
+   - Connects to the FTP server using the server's IP address and port number.
+   - Provides a command-line interface for users to execute FTP commands.
+   - Supports commands such as `get`, `put`, `ls`, and `quit` for file transfer and interaction with the server.
 
-For example: python server.py 1234
+---
 
-The ftp client is invoked as: client.py <server ip> <server port> 
+## Instructions
 
-Upon connecting to the server, the client prints out ftp>, which allows the user to execute the following commands.
+### Running the Server
+The server is invoked using the following command:
+```bash
+python client.py <server IP> <server port> 
+```
 
-ftp> get <file name> (downloads file <file name> from the server)
 
-ftp> put <filename> (uploads file <file name> to the server)
 
-ftp> ls (lists files on the server)
+- `<port number>` specifies the port at which the FTP server accepts connection requests.
+- Example: `python server.py 1234`
 
-ftp> quit (disconnects from the server and exits)
+- `<server IP>` is the IP address of the FTP server.
+- `<server port>` is the port number on which the server is running.
+- Example: `python client.py 127.0.0.1 1234`
+
+### Available Commands
+- `get <file name>`: Downloads the specified file from the server.
+- `put <file name>`: Uploads the specified file to the server.
+- `ls`: Lists files on the server.
+- `quit`: Disconnects from the server and exits the client application.
+
+---
+
+
+
+
