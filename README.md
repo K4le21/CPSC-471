@@ -31,13 +31,16 @@ The FTP File Transfer System is a client-server application built in Python. It 
 ### Running the Server
 The server is invoked using the following command:
 ```bash
-python client.py <server IP> <server port> 
+python server.py <server port> 
 ```
-
-
 
 - `<port number>` specifies the port at which the FTP server accepts connection requests.
 - Example: `python server.py 1234`
+
+The client is invoked using the following command:
+```bash
+python client.py <server IP> <server port> 
+```
 
 - `<server IP>` is the IP address of the FTP server.
 - `<server port>` is the port number on which the server is running.
